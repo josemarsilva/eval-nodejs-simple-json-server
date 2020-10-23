@@ -58,6 +58,7 @@ C:\...\eval-nodejs-simple-json-server> npm install -g json-server
 
 ### 3.5.1. Teste 1: Entendendo mecanismo de consulta, inclusão, alteração, remoção, backups da base###
 
+* Premissa: Lembre-se de ter executado o passo de [instalação de pacotes e dependências](#331-instalação-de-pacotes-e-dependências), senão o comando `json-server` não funciona! 
 * Passo #1: Iniciar o `json-server` que implementa os formulários RESTFULL sobre a base de daados `db.json`
 
 ```cmd

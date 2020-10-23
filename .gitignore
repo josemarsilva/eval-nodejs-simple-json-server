@@ -1,2 +1,5 @@
+# Custom 
+
+# NodeJS - Common ignore files
 /db-* 
 /node_modules/
