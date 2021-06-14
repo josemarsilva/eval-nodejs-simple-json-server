@@ -62,7 +62,7 @@ C:\...\eval-nodejs-simple-json-server> npm install -g json-server
 * Passo #1: Iniciar o `json-server` que implementa os formulários RESTFULL sobre a base de daados `db.json`
 
 ```cmd
-C:\..\eval-nodejs-simple-json-server>json-server db.json
+C:\..\eval-nodejs-simple-json-server> json-server db.json
 
   \{^_^}/ hi!
 
@@ -97,10 +97,10 @@ curl -H "Cache-Control: no-cache" http://localhost:3000/people
 ... o resultado esperado ...
 
 ```txt
-[  { "id": 0, "name": "Josemar Silva" }, 
-   { "id": 1, "name": "Maria Stela Silva" }, 
-   { "id": 2, "name": "Guilherme Silva" }, 
-   { "id": 3, "name": "Gabrielle Silva" } ]
+[  { "id": 1, "name": "Josemar Silva" }, 
+   { "id": 2, "name": "Maria Stela Silva" }, 
+   { "id": 3, "name": "Guilherme Silva" }, 
+   { "id": 4, "name": "Gabrielle Silva" } ]
 ```
 
 PS: Lembre-se que no Windows será preciso escapar o caracter aspas duplas \("\). No Linux, o uso do caracter aspas simples \('\) simplifica a linha de comando.
@@ -109,13 +109,13 @@ PS: Lembre-se que no Windows será preciso escapar o caracter aspas duplas \("\)
 * Passo #5: Faça uma requisição HTTP POST adicionando um novo registro à base de dados armazenada em JSON chamada `people` 
 
 ```cmd
-curl -X POST -H "Content-Type: application/json" -d "{ \"name\": \"Nome Novo 1\" }" http://localhost:3000/people
+curl -X POST -H "Content-Type: application/json" -d "{ \"name\": \"Primeiro Novo Nome" }" http://localhost:3000/people
 ```
 
 ```txt
 {
-  "name": "Nome Novo 1",
-  "id": 4
+  "name": "Primeiro Novo Nome",
+  "id": 5
 }
 ```
 
@@ -126,51 +126,51 @@ curl -H "Cache-Control: no-cache" http://localhost:3000/people
 ```
 
 ```txt
-[  { "id": 0, "name": "Josemar Silva" }, 
-   { "id": 1, "name": "Maria Stela Silva" }, 
-   { "id": 2, "name": "Guilherme Silva" }, 
-   { "id": 3, "name": "Gabrielle Silva" }, 
-   { "id": 4, "name": "Nome Novo 1" } ]
+[  { "id": 1, "name": "Josemar Silva" }, 
+   { "id": 2, "name": "Maria Stela Silva" }, 
+   { "id": 3, "name": "Guilherme Silva" }, 
+   { "id": 4, "name": "Gabrielle Silva" }, 
+   { "id": 5, "name": "Primeiro Novo Nome" } ]
 ```
 
 
 * Passo #7: Faça uma requisição HTTP PUT para **alterar** o atributo nome do registros de `people` recém inserido:
 
 ```cmd
-curl -X PUT -H "Content-Type: application/json" -d "{ \"name\": \"Melanie\" }" http://localhost:3000/people/4
+curl -X PUT -H "Content-Type: application/json" -d "{ \"name\": \"Primeiro Novo Nome Alterado\" }" http://localhost:3000/people/5
 ```
 
 ```txt
 {
-  "name": "Melanie",
-  "id": 4
+  "name": "Primeiro Novo Nome Alterado",
+  "id": 5
 }
 ```
 
 
-* Passo #8: Faça uma requisição HTTP GET para **consultar** todos os registros de `people`, observe que o atributo nome foi alterado. Em seguida faça uma consulta apenas do registro com atributo `id` = 4. Depois faça uma consulta executando buscando por uma query com base no atributo `nome=Melanie`
+* Passo #8: Faça uma requisição HTTP GET para **consultar** todos os registros de `people`, observe que o atributo nome foi alterado. Em seguida faça uma consulta apenas do registro com atributo `id` = 5. Depois faça uma consulta executando buscando por uma query com base no atributo `nome=Primeiro%20Novo%20Nome%20Alterado`
 
 ```cmd
 curl -H "Cache-Control: no-cache" http://localhost:3000/people
 ```
 
 ```txt
-[  { "id": 0, "name": "Josemar Silva" }, 
-   { "id": 1, "name": "Maria Stela Silva" }, 
-   { "id": 2, "name": "Guilherme Silva" }, 
-   { "id": 3, "name": "Gabrielle Silva" }, 
-   { "id": 4, "name": "Melanie" } ]
+[  { "id": 1, "name": "Josemar Silva" }, 
+   { "id": 2, "name": "Maria Stela Silva" }, 
+   { "id": 3, "name": "Guilherme Silva" }, 
+   { "id": 4, "name": "Gabrielle Silva" }, 
+   { "id": 5, "name": "Primeiro Novo Nome Alterado" } ]
 ```
 
 ```cmd
-curl -H "Cache-Control: no-cache" http://localhost:3000/people/4
+curl -H "Cache-Control: no-cache" http://localhost:3000/people/5
 curl -H "Cache-Control: no-cache" http://localhost:3000/people?q=Melanie
 ```
 
 ```txt
 {
   "name": "Melanie",
-  "id": 4
+  "id": 5
 }
 ```
 
@@ -178,7 +178,7 @@ curl -H "Cache-Control: no-cache" http://localhost:3000/people?q=Melanie
 * Passo #9: Faça uma requisição HTTP DELETE para **remover** o registros recém inserido de `id=4` de `people`. Em seguida uma requisição para incluir vários novos registro e depois consulte parra certificar-se que eles foram acrescentados à base de dados `people` (memória). Observe que o registro recém inserido `{id=4, name="Melanie"}` foi removido.
 
 ```cmd
-curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/people/4
+curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/people/5
 curl -H "Cache-Control: no-cache" http://localhost:3000/people
 curl -X POST -H "Content-Type: application/json" -d "{ \"name\": \"Nome Novo 2\" }" http://localhost:3000/people
 curl -X POST -H "Content-Type: application/json" -d "{ \"name\": \"Nome Novo 3\" }" http://localhost:3000/people
@@ -192,7 +192,7 @@ curl -H "Cache-Control: no-cache" http://localhost:3000/people
  :
   Type s + enter at any time to create a snapshot of the database
 ^C
-C:\..\eval-nodejs-simple-json-server>json-server db.json
+C:\..\eval-nodejs-simple-json-server> json-server db.json
  :
 curl -H "Cache-Control: no-cache" http://localhost:3000/people
 ```
@@ -209,8 +209,8 @@ S
 ```
 
 ```cmd
-curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/people/4
 curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/people/5
+curl -X DELETE -H "Content-Type: application/json" http://localhost:3000/people/6
 curl -H "Cache-Control: no-cache" http://localhost:3000/people
 ```
 
